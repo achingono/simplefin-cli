@@ -73,34 +73,3 @@ describe('saveConfig / loadConfig roundtrip', () => {
   });
 });
 
-
-describe('getAccessUrl / setAccessUrl', () => {
-  test('returns undefined when not set', () => {
-    expect(getAccessUrl()).toBeUndefined();
-  });
-
-  test('returns access URL after setAccessUrl', () => {
-    setAccessUrl('https://user:pass@bridge.example.com/simplefin');
-    expect(getAccessUrl()).toBe('https://user:pass@bridge.example.com/simplefin');
-  });
-});
-
-describe('clearConfig', () => {
-  test('removes the config file', () => {
-    setAccessUrl('https://test.example.com');
-    expect(getAccessUrl()).toBeDefined();
-    clearConfig();
-    expect(getAccessUrl()).toBeUndefined();
-  });
-
-  test('does not throw if no config file exists', () => {
-    expect(() => clearConfig()).not.toThrow();
-  });
-});
-
-describe('saveConfig / loadConfig roundtrip', () => {
-  test('saves and reloads config correctly', () => {
-    saveConfig({ accessUrl: 'https://example.com/api' });
-    expect(loadConfig()).toEqual({ accessUrl: 'https://example.com/api' });
-  });
-});
