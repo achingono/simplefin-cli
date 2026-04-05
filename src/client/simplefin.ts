@@ -96,7 +96,7 @@ export async function getAccounts(
   } catch (err) {
     const e = err as { message?: string; response?: { status?: number } };
     if (e.response?.status === 401 || e.response?.status === 403) {
-      throw new AppError(ErrorCodes.SETUP_REQUIRED, 'Access URL credentials are invalid — run: simpleton-cli setup <token>');
+      throw new AppError(ErrorCodes.SETUP_REQUIRED, 'Access URL credentials are invalid — run: simplefin-cli setup <token>');
     }
     if (e.response?.status === 429) {
       throw new AppError(ErrorCodes.RATE_LIMITED, 'Rate limited by SimpleFin Bridge — try again later');

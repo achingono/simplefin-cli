@@ -3,8 +3,8 @@ import * as os from 'os';
 import * as path from 'path';
 
 // Point config module at a temp directory so tests don't touch the real home dir
-const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'simpleton-cli-test-'));
-const configDir = path.join(tmpDir, '.simpleton-cli');
+const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'simplefin-cli-test-'));
+const configDir = path.join(tmpDir, '.simplefin-cli');
 const configFile = path.join(configDir, 'config.json');
 
 jest.mock('os', () => ({

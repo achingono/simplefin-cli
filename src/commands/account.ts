@@ -7,7 +7,7 @@ export async function handleAccountList(): Promise<void> {
   try {
     const accessUrl = getAccessUrl();
     if (!accessUrl) {
-      printError(ErrorCodes.SETUP_REQUIRED, 'Not configured. Run: simpleton-cli setup <token>');
+      printError(ErrorCodes.SETUP_REQUIRED, 'Not configured. Run: simplefin-cli setup <token>');
       return;
     }
 

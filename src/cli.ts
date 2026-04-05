@@ -17,7 +17,7 @@ program.configureOutput({
 });
 
 program
-  .name('simpleton-cli')
+  .name('simplefin-cli')
   .description('CLI client for the SimpleFin Bridge Protocol')
   .version('0.1.0');
 

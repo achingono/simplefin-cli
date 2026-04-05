@@ -45,14 +45,14 @@ jobs:
 
       - name: Create artifact
         if: github.event_name == 'push'
-        run: tar -czf simpleton-cli-${{ matrix.os }}.tar.gz dist package.json package-lock.json README.md LICENSE
+        run: tar -czf simplefin-cli-${{ matrix.os }}.tar.gz dist package.json package-lock.json README.md LICENSE
 
       - name: Upload artifact
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
-          name: simpleton-cli-${{ matrix.os }}
-          path: simpleton-cli-${{ matrix.os }}.tar.gz
+          name: simplefin-cli-${{ matrix.os }}
+          path: simplefin-cli-${{ matrix.os }}.tar.gz
 
   release:
     name: Create Release
@@ -70,6 +70,6 @@ jobs:
         with:
           generate_release_notes: true
           files: |
-            simpleton-cli-ubuntu-latest/simpleton-cli-ubuntu-latest.tar.gz
-            simpleton-cli-macos-latest/simpleton-cli-macos-latest.tar.gz
-            simpleton-cli-windows-latest/simpleton-cli-windows-latest.tar.gz
+            simplefin-cli-ubuntu-latest/simplefin-cli-ubuntu-latest.tar.gz
+            simplefin-cli-macos-latest/simplefin-cli-macos-latest.tar.gz
+            simplefin-cli-windows-latest/simplefin-cli-windows-latest.tar.gz

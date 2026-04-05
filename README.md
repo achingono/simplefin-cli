@@ -5,7 +5,7 @@ CLI client for the SimpleFin Bridge Protocol
 ## Installation
 
 ```bash
-npm install -g simpleton-cli
+npm install -g simplefin-cli
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install -g simpleton-cli
 Exchange a SimpleFin setup token for a persistent access URL:
 
 ```bash
-simpleton-cli setup <base64-token>
+simplefin-cli setup <base64-token>
 ```
 
 ### Status
@@ -23,7 +23,7 @@ simpleton-cli setup <base64-token>
 Check current configuration:
 
 ```bash
-simpleton-cli status
+simplefin-cli status
 ```
 
 ### Accounts
@@ -31,9 +31,9 @@ simpleton-cli status
 List all financial accounts:
 
 ```bash
-simpleton-cli account list
+simplefin-cli account list
 # or shorthand:
-simpleton-cli accounts
+simplefin-cli accounts
 ```
 
 ### Transactions
@@ -41,21 +41,21 @@ simpleton-cli accounts
 List all transactions across all accounts:
 
 ```bash
-simpleton-cli transaction list
+simplefin-cli transaction list
 # or shorthand:
-simpleton-cli transactions
+simplefin-cli transactions
 ```
 
 Filter by account:
 
 ```bash
-simpleton-cli transactions --account-id <id>
+simplefin-cli transactions --account-id <id>
 ```
 
 Filter by date range (ISO 8601):
 
 ```bash
-simpleton-cli transactions --start-date 2024-01-01 --end-date 2024-12-31
+simplefin-cli transactions --start-date 2024-01-01 --end-date 2024-12-31
 ```
 
 ### Reset
@@ -63,7 +63,7 @@ simpleton-cli transactions --start-date 2024-01-01 --end-date 2024-12-31
 Remove stored access URL and configuration:
 
 ```bash
-simpleton-cli reset
+simplefin-cli reset
 ```
 
 ## Output

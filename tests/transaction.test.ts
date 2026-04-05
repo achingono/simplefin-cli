@@ -102,7 +102,7 @@ describe('handleTransactionList', () => {
     await handleTransactionList({});
     expect(mockOutput.printError).toHaveBeenCalledWith(
       ErrorCodes.SETUP_REQUIRED,
-      expect.stringContaining('simpleton-cli setup'),
+      expect.stringContaining('simplefin-cli setup'),
     );
   });
 

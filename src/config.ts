@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 
-const CONFIG_DIR = path.join(os.homedir(), '.simpleton-cli');
+const CONFIG_DIR = path.join(os.homedir(), '.simplefin-cli');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 
 interface Config {

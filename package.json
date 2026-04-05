@@ -1,10 +1,10 @@
 {
-  "name": "simpleton-cli",
+  "name": "simplefin-cli",
   "version": "0.1.0",
   "description": "CLI client for the SimpleFin Bridge Protocol",
   "main": "dist/cli.js",
   "bin": {
-    "simpleton-cli": "./dist/cli.js"
+    "simplefin-cli": "./dist/cli.js"
   },
   "type": "commonjs",
   "scripts": {
