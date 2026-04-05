@@ -76,6 +76,11 @@ describe('parseUnixTimestamp', () => {
     const ts = parseUnixTimestamp('2024-06-01');
     expect(ts).not.toBeNull();
   });
+
+  test('rejects non-ISO date formats', () => {
+    expect(parseUnixTimestamp('06/01/2024')).toBeNull();
+    expect(parseUnixTimestamp('2024-06-01 10:00:00')).toBeNull();
+  });
 });
 
 describe('validateTransactionList', () => {

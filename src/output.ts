@@ -2,7 +2,7 @@
 export let _exit = (code: number): void => { process.exit(code); };
 
 export function printSuccess(data: object): void {
-  console.log(JSON.stringify({ ok: true, ...data }));
+  console.log(JSON.stringify({ ...data, ok: true }));
 }
 
 export function printError(code: string, message: string): void {

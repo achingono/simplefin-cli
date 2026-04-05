@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { claimAccessUrl } from './client/simplefin';
 import { handleAccountList } from './commands/account';
 import { handleTransactionList } from './commands/transaction';
-import { printSuccess, printError } from './output';
+import { printSuccess, printError, _exit } from './output';
 import { setAccessUrl, clearConfig, getAccessUrl } from './config';
 import { ErrorCodes } from './errors';
 
@@ -110,19 +110,27 @@ program
     }),
   );
 
-try {
-  program.parse(process.argv);
-} catch (err: unknown) {
-  if (err && typeof err === 'object' && 'code' in err) {
-    const ce = err as { code: string; message: string };
-    if (ce.code === 'commander.missingMandatoryOptionValue' || ce.code === 'commander.optionMissingArgument') {
-      printError(ErrorCodes.VALIDATION_ERROR, ce.message);
-    } else if (ce.code === 'commander.helpDisplayed' || ce.code === 'commander.version') {
-      process.exit(0);
+async function main(): Promise<void> {
+  try {
+    await program.parseAsync(process.argv);
+  } catch (err: unknown) {
+    if (err && typeof err === 'object' && 'code' in err) {
+      const ce = err as { code: string; message?: string };
+      if (ce.code === 'commander.missingMandatoryOptionValue' || ce.code === 'commander.optionMissingArgument') {
+        printError(ErrorCodes.VALIDATION_ERROR, ce.message || 'Missing required option');
+      } else if (ce.code === 'commander.helpDisplayed') {
+        printSuccess({ help: program.helpInformation() });
+        _exit(0);
+      } else if (ce.code === 'commander.version') {
+        printSuccess({ version: program.version() });
+        _exit(0);
+      } else {
+        printError(ErrorCodes.VALIDATION_ERROR, ce.message || 'Invalid command');
+      }
     } else {
-      printError(ErrorCodes.VALIDATION_ERROR, ce.message);
+      printError(ErrorCodes.VALIDATION_ERROR, String(err));
     }
-  } else {
-    printError(ErrorCodes.VALIDATION_ERROR, String(err));
   }
 }
+
+void main();

@@ -16,7 +16,8 @@ describe('output', () => {
 
   test('printSuccess outputs ok:true with data', () => {
     output.printSuccess({ message: 'hello' });
-    expect(consoleSpy).toHaveBeenCalledWith(JSON.stringify({ ok: true, message: 'hello' }));
+    const payload = JSON.parse(consoleSpy.mock.calls[0][0] as string);
+    expect(payload).toEqual({ ok: true, message: 'hello' });
   });
 
   test('printError outputs ok:false and calls exit', () => {
@@ -25,5 +26,11 @@ describe('output', () => {
       JSON.stringify({ ok: false, error: { code: 'TEST_CODE', message: 'test message' } })
     );
     expect(exitSpy).toHaveBeenCalledWith(1);
+  });
+
+  test('printSuccess forces ok true even if provided', () => {
+    output.printSuccess({ ok: false, message: 'hello' });
+    const payload = JSON.parse(consoleSpy.mock.calls[0][0] as string);
+    expect(payload).toEqual({ ok: true, message: 'hello' });
   });
 });

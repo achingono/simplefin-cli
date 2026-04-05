@@ -41,12 +41,19 @@ export interface SFAccountSet {
  * the permanent access URL which includes embedded credentials.
  */
 export async function claimAccessUrl(setupToken: string): Promise<string> {
-  let claimUrl: string;
-  try {
-    claimUrl = Buffer.from(setupToken.trim(), 'base64').toString('utf-8').trim();
-  } catch {
+  const normalizedToken = setupToken.trim();
+  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(normalizedToken) || normalizedToken.length % 4 !== 0) {
     throw new AppError(ErrorCodes.SETUP_INVALID, 'Failed to decode setup token — must be a valid base64 string');
   }
+
+  const decodedBuffer = Buffer.from(normalizedToken, 'base64');
+  const reencoded = decodedBuffer.toString('base64').replace(/=+$/, '');
+  const normalizedInput = normalizedToken.replace(/=+$/, '');
+  if (reencoded !== normalizedInput || decodedBuffer.length === 0) {
+    throw new AppError(ErrorCodes.SETUP_INVALID, 'Failed to decode setup token — must be a valid base64 string');
+  }
+
+  const claimUrl = decodedBuffer.toString('utf-8').trim();
 
   if (!claimUrl.startsWith('http')) {
     throw new AppError(ErrorCodes.SETUP_INVALID, `Decoded setup token is not a valid URL: ${claimUrl}`);
